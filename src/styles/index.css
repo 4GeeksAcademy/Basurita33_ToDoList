@@ -3,13 +3,13 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-image: url('https://i.pinimg.com/originals/71/67/3d/71673dea7d639d8f3e47b8752e1ff6d6.jpg');
-    background-size: cover;       /* Ensure the image covers the entire page */
-    background-position: center;  /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    height: 100vh;                /* Make sure the body takes full height */
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    height: 100vh;               
 }
 
-.list-container {
+.app-container {
     width: 500px;
     min-height: 500px;
     margin: 100px auto;
@@ -18,52 +18,75 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     border-radius: 8px;
-  }
-
-.h1 {
-    font-family: 'Roboto', cursive;
-    font-size: 3rem;
-    font-weight: bolder;
-    text-shadow: 3px 4px 4px rgba(0, 0, 0, 0.63);
 }
 
-.inputTask {
+.app-header {
+    font-family: 'Roboto', cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.task-input {
     width: 50%;
     margin: 20px;
-    padding: 3px;
+    padding: 10px;
+    border: 3px solid #fc5ae1;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
-.ulTasks {
+.task-ul {
     margin: 20px;
     font-size: 20px;
     list-style-type: none;
+    padding: 0;
 }
 
-.liTask {
+.task-li {
     background: rgb(252, 204, 253);
     margin: 10px 0;
     padding: 10px;
     border-radius: 4px;
     font-size: 18px;
     text-align: left;
-  }
+    position: relative;
+}
 
 .delete-button {
-    float: right;
+    position: absolute;
+    right: 10px;
     background: none;
     border: none;
-    color: #000000;
+    color: #000;
     font-size: 20px;
     cursor: pointer;
     padding: 0;
+    transition: color 0.3s, font-size 0.3s;
 }
 
-.taskItem {
-    cursor: pointer;
+.delete-button:hover {
+    color: #ff0000;
+    font-size: 22px;
 }
 
 .tasks-count {
     font-family: 'Roboto', cursive;
     font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .appContainer {
+        width: 90%;
+        min-height: auto;
+        margin: 20px auto;
+    }
+    
+    .inputTask {
+        width: 100%;
+    }
+
+    .ulTasks {
+        font-size: 18px;
+    }
 }
