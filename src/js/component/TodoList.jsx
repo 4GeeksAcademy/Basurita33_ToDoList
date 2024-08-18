@@ -105,6 +105,49 @@ const TodoList = () => {
     }
   };
 
+  const changeCheckStatus = (task) => {
+    fetch(`https://playground.4geeks.com/todo/todos/${task.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        label: task.label,
+        is_done: !task.is_done,
+      }),
+    })
+      .then((response) => {
+        const task = response.json();
+        const newTaskList = tasksList.map((taskItem) => {
+          if (taskItem.id === task.id) {
+            return task;
+          }
+          return taskItem;
+        });
+        setTasksList(newTaskList);
+      })
+      .then(() => {
+        getListTasks();
+        console.log("Task status updated");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const deleteUserTasks = () => {
+    fetch(`https://playground.4geeks.com/todo/users/${userName}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setTasksList([]);
+        console.log("User tasks deleted");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <div>
       <input
@@ -118,6 +161,7 @@ const TodoList = () => {
       <ul className="task-ul">
         {tasksList.map((task, index) => (
           <li className="task-li" key={index}>
+            <input className="checkbox" type="checkbox" id={`checkbox-${index}`} checked={task.is_done} onChange={() => changeCheckStatus(task)} />
             {task.label}
             <button className="delete-button" onClick={() => deleteTask(index)}>
               ×
@@ -125,6 +169,7 @@ const TodoList = () => {
           </li>
         ))}
       </ul>
+      <button className="delete-all-button" onClick={deleteUserTasks}>Delete them all</button>
       <div className="tasks-count">
         {tasksList.length} task{tasksList.length > 1 ? "s" : ""} left
       </div>
